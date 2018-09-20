@@ -13,8 +13,16 @@ import { SESSION_STORAGE, StorageService,StorageServiceModule } from 'angular-we
 })
 export class DeckCreateComponent implements OnInit {
 
-  constructor(@Inject(SESSION_STORAGE) private storage:StorageService)
+  constructor(@Inject(SESSION_STORAGE) private storage:StorageService,
+              private location: Location,
+              private route: ActivatedRoute)
   {}
+
+  goBack(): void {
+    // console.log("display of previous stage and new stage.");
+    // this.storeOnLocalStorage();
+    this.location.back();
+  }
 
   public storeOnLocalStorage(): void {
     let key = 'decklist';
