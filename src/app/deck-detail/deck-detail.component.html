@@ -1,0 +1,33 @@
+<div *ngIf="deck">
+
+  <h2>{{deck.name | uppercase}} Details</h2>
+  <!-- <div><span>id: </span>{{deck.id}}</div> -->
+  <div>
+    <label>name:
+      <input [(ngModel)]="deck.name" placeholder="name"/>
+    </label>
+  </div>
+  <h1>Mana Deck Balance</h1>
+  <div>
+    <label>red:
+      <input [(ngModel)]="deck.red" placeholder="red"/>
+    </label>
+    <label>blue:
+      <input [(ngModel)]="deck.blue" placeholder="blue"/>
+    </label>
+    <label>green:
+      <input [(ngModel)]="deck.green" placeholder="green"/>
+    </label>
+    <label>black:
+      <input [(ngModel)]="deck.black" placeholder="black"/>
+    </label>
+    <label>white:
+      <input [(ngModel)]="deck.white" placeholder="white"/>
+    </label>
+    <label>Lands:
+      <input [(ngModel)]="deck.lands" placeholder="lands"/>
+    </label>
+  </div>
+
+</div>
+<button (click)="goBack()">go back</button>
