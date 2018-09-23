@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DeckService }  from '../deck.service';
 import { Deck } from '../deck';
 import { Inject, Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -11,7 +13,9 @@ import { Inject, Injectable } from '@angular/core';
 })
 export class DeckDeleteComponent implements OnInit {
   identifier:number;
-  constructor(private deckService: DeckService) { }
+  constructor(private deckService: DeckService,
+              private location: Location,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -20,7 +24,8 @@ export class DeckDeleteComponent implements OnInit {
   {
     let salida = this.deckService.deleteDeck(this.identifier);
     console.log(salida);
-    window.location.reload();
+    this.location.back();
+    // window.location.reload();
   }
 
 }
