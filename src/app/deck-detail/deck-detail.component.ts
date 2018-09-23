@@ -17,8 +17,7 @@ export class DeckDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private deckService: DeckService,
-    private location: Location,
-    @Inject(SESSION_STORAGE) private storage:StorageService) { }
+    private location: Location) { }
 
   ngOnInit(): void {
     this.getDeck();
@@ -30,27 +29,15 @@ export class DeckDetailComponent implements OnInit {
       .subscribe(deck => this.deck = deck);
   }
 
-  // public storeOnLocalStorage(): void {
-  //   let key = 'decklist';
-  //   //show previous state of LocalStorage
-  //   console.log(this.storage.get(key) || 'LocaL storage is empty');
-  //  //get array of tasks from local storage
-  //  let currentDeckList = this.storage.get(key) || [];
-  //
-  //  // push new task to array
-  //  currentDeckList.push({ id: 11, name: 'Aggro',
-  //    red:0,white:0,black:0,blue:0,green:0,lands:0});
-  //
-  //  this.storage.set(key, currentDeckList);
-  //  //verify storage
-  //  console.log(this.storage.get(key) || 'LocaL storage is empty');
-  //
-  // }
-
   goBack(): void {
     // console.log("display of previous stage and new stage.");
     // this.storeOnLocalStorage();
     this.location.back();
+  }
+
+  updateDeck(): void {
+    this.deckService.updateDeck(this.deck);
+    alert("This Decks has been updated!");
   }
 
 }

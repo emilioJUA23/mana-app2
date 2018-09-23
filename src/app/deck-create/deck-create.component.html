@@ -2,31 +2,31 @@
   <!-- <div><span>id: </span>{{deck.id}}</div> -->
   <div>
     <label>name:
-      <input [(ngModel)]="deck.name" placeholder="name"/>
+      <input [(ngModel)]="name" placeholder="name"/>
     </label>
   </div>
   <h1>Mana Deck Balance</h1>
   <div>
     <label>red:
-      <input [(ngModel)]="deck.red" placeholder="red"/>
+      <input [(ngModel)]="red" placeholder="red"/>
     </label>
     <label>blue:
-      <input [(ngModel)]="deck.blue" placeholder="blue"/>
+      <input [(ngModel)]="blue" placeholder="blue"/>
     </label>
     <label>green:
-      <input [(ngModel)]="deck.green" placeholder="green"/>
+      <input [(ngModel)]="green" placeholder="green"/>
     </label>
     <label>black:
-      <input [(ngModel)]="deck.black" placeholder="black"/>
+      <input [(ngModel)]="black" placeholder="black"/>
     </label>
     <label>white:
-      <input [(ngModel)]="deck.white" placeholder="white"/>
+      <input [(ngModel)]="white" placeholder="white"/>
     </label>
     <label>Lands:
-      <input [(ngModel)]="deck.lands" placeholder="lands"/>
+      <input [(ngModel)]="lands" placeholder="lands"/>
     </label>
   </div>
 <div>
-  <button >Create</button>
+  <button (click)="createDeck()" >Create</button>
   <button (click)="goBack()">go back</button>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DeckService }  from '../deck.service';
+import { Deck } from '../deck';
 import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService,StorageServiceModule } from 'angular-webstorage-service';
 
@@ -12,33 +13,34 @@ import { SESSION_STORAGE, StorageService,StorageServiceModule } from 'angular-we
   styleUrls: ['./deck-create.component.css']
 })
 export class DeckCreateComponent implements OnInit {
-
+  deck:Deck;
+  decks:Deck[];
+  name:string;
+  red:number;black:number;white:number;green:number;blue:number;lands:number;
   constructor(@Inject(SESSION_STORAGE) private storage:StorageService,
               private location: Location,
+              private deckService: DeckService,
               private route: ActivatedRoute)
   {}
 
   goBack(): void {
-    // console.log("display of previous stage and new stage.");
-    // this.storeOnLocalStorage();
     this.location.back();
   }
 
-  public storeOnLocalStorage(): void {
-    let key = 'decklist';
-    //show previous state of LocalStorage
-    console.log(this.storage.get(key) || 'LocaL storage is empty');
-   //get array of tasks from local storage
-   let currentDeckList = this.storage.get(key) || [];
-
-   // push new task to array
-   currentDeckList.push({ id: 11, name: 'Aggro',
-     red:0,white:0,black:0,blue:0,green:0,lands:0});
-
-   this.storage.set(key, currentDeckList);
-   //verify storage
-   console.log(this.storage.get(key) || 'LocaL storage is empty');
-
+  createDeck(): void{
+    // let deck Deck;
+    this.deckService.getDecks()
+      .subscribe(decks => this.decks = decks);
+    this.deck = {
+      id: this.decks.length+1, name: this.name,
+      red:this.red,white:this.white,
+      black:this.black,blue:this.blue,
+      green:this.green,lands:this.lands,
+      show:true
+    };
+    let salida = this.deckService.createDeck(this.deck);
+    this.goBack();
+    console.log(salida);
   }
 
 

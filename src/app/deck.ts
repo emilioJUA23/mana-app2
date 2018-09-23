@@ -7,4 +7,5 @@ export class Deck {
   blue:number;
   green:number;
   lands:number;
+  show:boolean;
 }

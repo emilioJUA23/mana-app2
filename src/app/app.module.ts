@@ -10,6 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { DeckCreateComponent } from './deck-create/deck-create.component';
+import { DeckDeleteComponent } from './deck-delete/deck-delete.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DeckCreateComponent } from './deck-create/deck-create.component';
     DeckDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    DeckCreateComponent
+    DeckCreateComponent,
+    DeckDeleteComponent
   ],
   imports: [
   BrowserModule,

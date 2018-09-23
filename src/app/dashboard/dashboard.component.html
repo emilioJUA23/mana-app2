@@ -1,8 +1,14 @@
 <h3>Your Decks</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let deck of decks" class="col-1-4" routerLink="/detail/{{deck.id}}">
+  <div *ngFor="let deck of decks">
+  <a *ngIf="deck.show" class="col-1-4" routerLink="/detail/{{deck.id}}">
     <div class="module deck">
       <h4>{{deck.name}}</h4>
+      <span>Deck identifier:{{deck.id}}</span>
     </div>
   </a>
+</div>
+</div>
+<div>
+  <app-deck-delete></app-deck-delete>
 </div>
