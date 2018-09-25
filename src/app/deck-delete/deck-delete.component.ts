@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DeckService }  from '../deck.service';
-import { Deck } from '../deck';
-import { Inject, Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -14,8 +11,7 @@ import { Location } from '@angular/common';
 export class DeckDeleteComponent implements OnInit {
   identifier:number;
   constructor(private deckService: DeckService,
-              private location: Location,
-              private route: ActivatedRoute) { }
+              private location: Location) { }
 
   ngOnInit() {
   }

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DeckService }  from '../deck.service';
 import { Deck } from '../deck';
-import { Inject, Injectable } from '@angular/core';
-import { SESSION_STORAGE, StorageService,StorageServiceModule } from 'angular-webstorage-service';
 
 
 @Component({
@@ -17,10 +14,8 @@ export class DeckCreateComponent implements OnInit {
   decks:Deck[];
   name:string;
   red:number;black:number;white:number;green:number;blue:number;lands:number;
-  constructor(@Inject(SESSION_STORAGE) private storage:StorageService,
-              private location: Location,
-              private deckService: DeckService,
-              private route: ActivatedRoute)
+  constructor(private location: Location,
+              private deckService: DeckService)
   {}
 
   goBack(): void {
