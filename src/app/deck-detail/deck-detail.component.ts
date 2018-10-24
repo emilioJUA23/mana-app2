@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Deck } from '../deck';
+import { Deck, Deck_cache } from '../deck';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
@@ -13,7 +13,6 @@ import { DeckService }  from '../deck.service';
 })
 export class DeckDetailComponent implements OnInit {
   @Input() deck:Deck;
-
   constructor(
     private route: ActivatedRoute,
     private deckService: DeckService,
@@ -30,14 +29,18 @@ export class DeckDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    // console.log("display of previous stage and new stage.");
-    // this.storeOnLocalStorage();
     this.location.back();
   }
 
   updateDeck(): void {
     this.deckService.updateDeck(this.deck);
-    alert("This Decks has been updated!");
+    // alert("This Decks has been updated!");
+  }
+
+  deleteDeck()
+  {
+    let salida = this.deckService.deleteDeck(this.deck._id);
+    this.location.back();
   }
 
 }

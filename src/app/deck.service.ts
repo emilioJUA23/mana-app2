@@ -52,39 +52,28 @@ export class DeckService {
   }
 
   updateDeck(deck:Deck): Observable<Deck[]> {
-    let key = 'decklist';
-   //get array of decks from local storage
-    let currentDeckList = this.storage.get(key) || [];
-
-   // find old deck and replace it
-    let index = currentDeckList.findIndex(obj => obj.id===deck._id);
-    if (index !== -1) {
-        currentDeckList[index] = deck;
-    }
-
-    this.storage.set(key, currentDeckList);
-    //verify storage
-    console.log(this.storage.get(key) || 'LocaL storage is empty');
-
-    return this.storage.get(key) || [];
+   var _id = deck._id;
+   delete deck._id;
+   var req = new XMLHttpRequest();
+   req.open('PUT', 'http://localhost:3000/api/v1/deck/'+_id, true);
+   req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+   req.send(JSON.stringify(deck));
+   return of([]);
 
   }
 
-  deleteDeck(id:number): Observable<Deck[]> {
-    let key = 'decklist';
-   //get array of decks from local storage
-    let currentDeckList = this.storage.get(key) || [];
-   // find old deck and replace it
-    let index = currentDeckList.findIndex(obj => obj.id==id);
-    if (index !== -1) {
-        currentDeckList[index].show=false;
+  deleteDeck(id:string): Observable<Deck[]> {
+    var req = new XMLHttpRequest();
+    req.open('DELETE', 'http://localhost:3000/api/v1/deck/'+id, false);
+    req.send(null);
+    if (req.status == 200)
+    {
+      return of();
     }
-
-    this.storage.set(key, currentDeckList);
-    //verify storage
-    console.log(this.storage.get(key) || 'LocaL storage is empty');
-    return this.storage.get(key) || [];
-
+    else
+    {
+      return of();
+    }
   }
 
   constructor(private messageService: MessageService,

@@ -18,9 +18,9 @@ export class DeckDeleteComponent implements OnInit {
 
   deleteDeck()
   {
-    let salida = this.deckService.deleteDeck(this.identifier);
-    console.log(salida);
-    this.location.back();
+    // let salida = this.deckService.deleteDeck(this.identifier);
+    // console.log(salida);
+    // this.location.back();
     // window.location.reload();
   }
 
