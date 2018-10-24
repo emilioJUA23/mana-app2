@@ -1,10 +1,9 @@
 <h3>Your Decks</h3>
 <div class="grid grid-pad">
   <div *ngFor="let deck of decks">
-  <a *ngIf="deck.show" class="col-1-4" routerLink="/detail/{{deck.id}}">
+  <a class="col-1-4" routerLink="/detail/{{deck._id}}">
     <div class="module deck">
       <h4>{{deck.name}}</h4>
-      <span>Deck identifier:{{deck.id}}</span>
     </div>
   </a>
 </div>

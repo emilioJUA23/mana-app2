@@ -1,5 +1,5 @@
 export class Deck {
-  id: number;
+  _id: string;
   name: string;
   red:number;
   white:number;
@@ -7,5 +7,14 @@ export class Deck {
   blue:number;
   green:number;
   lands:number;
-  show:boolean;
+}
+
+export class Deck_cache{
+  name: string;
+  red:number;
+  white:number;
+  black:number;
+  blue:number;
+  green:number;
+  lands:number;
 }

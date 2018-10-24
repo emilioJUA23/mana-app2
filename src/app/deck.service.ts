@@ -1,5 +1,5 @@
 import { Inject,Injectable } from '@angular/core';
-import { Deck } from './deck';
+import { Deck,Deck_cache } from './deck';
 import { DECKS } from './mock-decks';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
@@ -12,38 +12,43 @@ export class DeckService {
 
   getDecks(): Observable<Deck[]>
   {
-    // this.messageService.add('DeckService: fetched decks');
-    // return of(DECKS);
-    // this.storage.set('decklist', DECKS);
-    // console.log(this.storage.get('decklist'));
-    return of(this.storage.get('decklist') || []);
+      var req = new XMLHttpRequest();
+      req.open('GET', 'http://localhost:3000/api/v1/deck/', false);
+      req.send(null);
+      if (req.status == 200)
+      {
+        var jsonArray = JSON.parse(req.responseText);
+        return of(jsonArray);
+      }
+      else
+      {
+        return of([]);
+      }
+
   }
-  getDeck(id: number): Observable<Deck> {
-    // TODO: send the message _after_ fetching the hero
-    // this.messageService.add(`DeckService: fetched deck id=${id}`);
-    // return of(DECKS.find(deck => deck.id === id));
-    let key = 'decklist';
-    let currentDeckList = this.storage.get(key) || [];
-    return of(currentDeckList.find(deck=> deck.id===id))
+  getDeck(id: string): Observable<Deck> {
+    var req = new XMLHttpRequest();
+    req.open('GET', 'http://localhost:3000/api/v1/deck/'+id, false);
+    req.send(null);
+    if (req.status == 200)
+    {
+      var json = JSON.parse(req.responseText);
+      console.log(json);
+      return of(json);
+    }
+    else
+    {
+      return of();
+    }
   }
 
 
-  createDeck(deck:Deck): Observable<Deck[]> {
-    let key = 'decklist';
-    //show previous state of LocalStorage
-    console.log(this.storage.get(key) || 'LocaL storage is empty');
-   //get array of tasks from local storage
-   let currentDeckList = this.storage.get(key) || [];
-
-   // push new task to array
-   currentDeckList.push(deck);
-
-   this.storage.set(key, currentDeckList);
-   //verify storage
-   console.log(this.storage.get(key) || 'LocaL storage is empty');
-
-   return this.storage.get(key) || [];
-
+  createDeck(deck:Deck_cache): Observable<Deck[]> {
+   var req = new XMLHttpRequest();
+   req.open('POST', 'http://localhost:3000/api/v1/deck/', true);
+   req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+   req.send(JSON.stringify(deck));
+   return of([]);
   }
 
   updateDeck(deck:Deck): Observable<Deck[]> {
@@ -52,7 +57,7 @@ export class DeckService {
     let currentDeckList = this.storage.get(key) || [];
 
    // find old deck and replace it
-    let index = currentDeckList.findIndex(obj => obj.id===deck.id);
+    let index = currentDeckList.findIndex(obj => obj.id===deck._id);
     if (index !== -1) {
         currentDeckList[index] = deck;
     }

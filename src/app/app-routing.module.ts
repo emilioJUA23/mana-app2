@@ -7,7 +7,7 @@ import { DeckCreateComponent } from './deck-create/deck-create.component';
 import { DeckDeleteComponent } from './deck-delete/deck-delete.component';
 
 const routes: Routes = [
-  { path: 'detail/:id', component: DeckDetailComponent },
+  { path: 'detail/:_id', component: DeckDetailComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'decks', component: DeckComponent },

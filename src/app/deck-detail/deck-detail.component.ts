@@ -24,7 +24,7 @@ export class DeckDetailComponent implements OnInit {
   }
 
   getDeck(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('_id');
     this.deckService.getDeck(id)
       .subscribe(deck => this.deck = deck);
   }

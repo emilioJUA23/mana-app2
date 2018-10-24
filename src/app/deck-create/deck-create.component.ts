@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { DeckService }  from '../deck.service';
-import { Deck } from '../deck';
+import { Deck,Deck_cache } from '../deck';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { Deck } from '../deck';
   styleUrls: ['./deck-create.component.css']
 })
 export class DeckCreateComponent implements OnInit {
-  deck:Deck;
+  deck:Deck_cache;
   decks:Deck[];
   name:string;
   red:number;black:number;white:number;green:number;blue:number;lands:number;
@@ -27,11 +27,10 @@ export class DeckCreateComponent implements OnInit {
     this.deckService.getDecks()
       .subscribe(decks => this.decks = decks);
     this.deck = {
-      id: this.decks.length+1, name: this.name,
+      name: this.name,
       red:this.red,white:this.white,
       black:this.black,blue:this.blue,
       green:this.green,lands:this.lands,
-      show:true
     };
     let salida = this.deckService.createDeck(this.deck);
     this.goBack();
